@@ -10,11 +10,56 @@ SplayTree::SplayTree() {
 
 Node* SplayTree::access(int i) {
     root = splay(root,i); 
-    return root;
+    return root; 
 }
 
 // splay used in access 
 Node* SplayTree::splay(Node* x, int i) {
+    // if (x == NULL || x->value == i) {
+    //     return root; 
+    // }
+
+    // if (i < x->value) {
+    //     if (x->left == NULL) {
+    //         return root; 
+    //     }
+    //     // zig-zig (right, right)
+    //     if (i < x->left->value) {
+    //         x->left->left = splay(x->left->left, i); 
+    //         x = rotateRight(x); 
+    //     }
+    //     // zig-zag (left, right)
+    //     if (i > x->left->value) {
+    //         x->left->right = splay(x->left->right, i); 
+    //         if (x->left->right != NULL) {
+    //             x->left = rotateLeft(x->left); 
+    //         }
+    //     }
+    //     if (x->left == NULL) {
+    //         return x; 
+    //     }
+    //     // zig (right)
+    //     return rotateRight(x); 
+    // }
+    // else {
+    //     if (x->right == NULL) {
+    //         return root; 
+    //     }
+    //     if (i > x->right->value) {
+    //         x->right->right = splay(x->right->right, i); 
+    //         x = rotateLeft(x); 
+    //     }
+    //     if (i < x->right->value) {
+    //         x->right->left = splay(x->right->left, i); 
+    //         if (x->right->left != NULL) {
+    //             x->right = rotateRight(x->right); 
+    //         }
+    //     }
+    //     if (x->right == NULL) {
+    //         return root;
+    //     }
+    //     return rotateLeft(x); 
+    // }
     if (x == NULL || x->value == i) {
         return x; 
     }
@@ -39,6 +84,7 @@ Node* SplayTree::splay(Node* x, int i) {
         }
         return rotateRight(x); 
     }
+    // right side 
     else {
         if (x->right == NULL) {
             return x; 
@@ -56,6 +102,10 @@ Node* SplayTree::splay(Node* x, int i) {
         if (x->right == NULL) {
             return x; 
         }
+        // if (x->right->value == i && x->parent != NULL) {
+        //     x = rotateLeft(x); 
+        //     return rotateLeft(x->parent); 
+        // }
         return rotateLeft(x); 
     }
 }
@@ -133,13 +183,13 @@ void SplayTree::remove(int i) {
     }
 }
 
-void SplayTree::print(Node* n) {
-    if (root != NULL) 
-    { 
-        printf("%d ", root->value); 
-        print(root->left); 
-        print(root->right); 
-    } 
+void SplayTree::printBFS(Node* n) {
+    int h = height(n); 
+    int i; 
+    for (i=1; i<=h; i++) {
+        printLevel(n, i); 
+        cout << "\n";
+    }
 }
 
 Node* SplayTree::getRoot() {
@@ -162,24 +212,13 @@ Node* SplayTree::rotateLeft(Node* x) {
 
 Node* SplayTree::getMax(Node* x) {
     Node* n = x; 
-    while(n != NULL) {
+    while(n->right != NULL) {
         n=n->right; 
     }
     return n;
 }
 
-void SplayTree::printLevelOrder(Node* root) 
-{ 
-    int h = height(root); 
-    int i; 
-    for (i=1; i<=h; i++) {
-        printGivenLevel(root, i); 
-        cout << "\n";
-    }
-} 
-  
-/* Print nodes at a given level */
-void SplayTree::printGivenLevel(Node* root, int level) 
+void SplayTree::printLevel(Node* root, int level) 
 { 
     if (root == NULL) 
         return; 
@@ -188,8 +227,8 @@ void SplayTree::printGivenLevel(Node* root, int level)
     }
     else if (level > 1) 
     { 
-        printGivenLevel(root->left, level-1); 
-        printGivenLevel(root->right, level-1); 
+        printLevel(root->left, level-1); 
+        printLevel(root->right, level-1); 
     } 
 } 
 
@@ -199,13 +238,13 @@ int SplayTree::height(Node* node)
         return 0; 
     else
     { 
-        /* compute the height of each subtree */
-        int lheight = height(node->left); 
-        int rheight = height(node->right); 
-  
-        /* use the larger one */
-        if (lheight > rheight) 
-            return(lheight+1); 
-        else return(rheight+1); 
+        int heightLeft = height(node->left); 
+        int heightRight = height(node->right); 
+        if (heightLeft > heightRight) {
+            return(heightLeft+1); 
+        }
+        else {
+            return(heightRight+1); 
+        }
     } 
 } 

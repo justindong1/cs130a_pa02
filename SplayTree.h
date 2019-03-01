@@ -9,9 +9,9 @@ struct Node {
     int value; 
     Node* left;
     Node* right; 
-    Node* parent;
+    Node* parent; 
 
-    Node(int i) : value(i), left(0), right(0), parent(0) {}
+    Node(int i) : value(i), left(0), right(0) {}
 };
 
 class SplayTree {
@@ -24,19 +24,18 @@ class SplayTree {
         void find(int i); 
         void insert(int i); 
         void remove(int i);
-        void print(Node *n);  
+        void printBFS(Node *n);  
 
         Node* getRoot(); 
         Node* rotateRight(Node* x); 
         Node* rotateLeft(Node* x); 
         Node* getMax(Node* x); 
 
-        void printLevelOrder(Node* root);
-        void printGivenLevel(Node* root, int level);
+        void printLevel(Node* root, int level);
         int height(Node* node);
 
-        Node* root; 
     private: 
+        Node* root;
         
 };
 

@@ -23,28 +23,29 @@ int main() {
         if (com == "insert") {
             cin >> num; 
             s.insert(convertToInt(num)); 
-            s.printLevelOrder(s.root);
+            // s.printBFS(s.getRoot());
             num = ""; 
         }
         if (com == "find") {
             cin >> num; 
             s.find(convertToInt(num)); 
-            // s.printLevelOrder(s.root);
+            // s.printBFS(s.getRoot());
             num = ""; 
         }
         if (com == "delete") {
             cin >> num; 
             s.remove(convertToInt(num)); 
-            // s.printLevelOrder(s.root);
+            // s.printBFS(s.getRoot());
             num = ""; 
         }
         if (com == "print") {
-            s.printLevelOrder(s.root);
+            s.printBFS(s.getRoot());
             break; 
         }
     }
 
     // SplayTree s; 
+    // s.split(1,s.getRoot());
     // s.insert(1);
     // s.printLevelOrder(s.root);
     // s.find(1);
