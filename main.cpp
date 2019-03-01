@@ -23,19 +23,16 @@ int main() {
         if (com == "insert") {
             cin >> num; 
             s.insert(convertToInt(num)); 
-            // s.printBFS(s.getRoot());
             num = ""; 
         }
         if (com == "find") {
             cin >> num; 
             s.find(convertToInt(num)); 
-            // s.printBFS(s.getRoot());
             num = ""; 
         }
         if (com == "delete") {
             cin >> num; 
             s.remove(convertToInt(num)); 
-            // s.printBFS(s.getRoot());
             num = ""; 
         }
         if (com == "print") {
@@ -43,31 +40,5 @@ int main() {
             break; 
         }
     }
-
-    // SplayTree s; 
-    // s.split(1,s.getRoot());
-    // s.insert(1);
-    // s.printLevelOrder(s.root);
-    // s.find(1);
-    // s.printLevelOrder(s.root);
-    // s.insert(3);
-    // s.printLevelOrder(s.root);
-    // s.insert(5);
-    // s.printLevelOrder(s.root);
-    // s.insert(2);
-    // s.printLevelOrder(s.root);
-    // s.insert(6);
-    // s.printLevelOrder(s.root);
-    // s.insert(6);
-    // s.printLevelOrder(s.root);
-    // s.remove(7);
-    // s.printLevelOrder(s.root);
-    // s.remove(1);
-    // s.printLevelOrder(s.root);
-
-
-    // fix access(i), the error is that even if the value is not in the tree, it will still splay the last value 
-    //and return root, what i want is that it splays the last value and returns NULL
-    
     return 0; 
 }
