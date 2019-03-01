@@ -1,2 +1,2 @@
 # cs130a_pa02
-cs130a project 2 
+C++, CSIL Login: jdong675, UCSB Email: jsdong@umail.ucsb.edu
