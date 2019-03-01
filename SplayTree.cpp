@@ -13,53 +13,7 @@ Node* SplayTree::access(int i) {
     return root; 
 }
 
-// splay used in access 
 Node* SplayTree::splay(Node* x, int i) {
-    // if (x == NULL || x->value == i) {
-    //     return root; 
-    // }
-
-    // if (i < x->value) {
-    //     if (x->left == NULL) {
-    //         return root; 
-    //     }
-    //     // zig-zig (right, right)
-    //     if (i < x->left->value) {
-    //         x->left->left = splay(x->left->left, i); 
-    //         x = rotateRight(x); 
-    //     }
-    //     // zig-zag (left, right)
-    //     if (i > x->left->value) {
-    //         x->left->right = splay(x->left->right, i); 
-    //         if (x->left->right != NULL) {
-    //             x->left = rotateLeft(x->left); 
-    //         }
-    //     }
-    //     if (x->left == NULL) {
-    //         return x; 
-    //     }
-    //     // zig (right)
-    //     return rotateRight(x); 
-    // }
-    // else {
-    //     if (x->right == NULL) {
-    //         return root; 
-    //     }
-    //     if (i > x->right->value) {
-    //         x->right->right = splay(x->right->right, i); 
-    //         x = rotateLeft(x); 
-    //     }
-    //     if (i < x->right->value) {
-    //         x->right->left = splay(x->right->left, i); 
-    //         if (x->right->left != NULL) {
-    //             x->right = rotateRight(x->right); 
-    //         }
-    //     }
-    //     if (x->right == NULL) {
-    //         return root;
-    //     }
-    //     return rotateLeft(x); 
-    // }
     if (x == NULL || x->value == i) {
         return x; 
     }
@@ -70,8 +24,9 @@ Node* SplayTree::splay(Node* x, int i) {
             return x; 
         }
         if (i < x->left->value) {
-            x->left->left = splay(x->left->left, i); 
+            // case 2 step 1
             x = rotateRight(x); 
+            x->left = splay(x->left, i); 
         }
         else if (i > x->left->value) {
             x->left->right = splay(x->left->right, i); 
@@ -82,9 +37,8 @@ Node* SplayTree::splay(Node* x, int i) {
         if (x->left == NULL) {
             return x;
         }
-        return rotateRight(x); 
+        return rotateRight(x);
     }
-    // right side 
     else {
         if (x->right == NULL) {
             return x; 
@@ -96,16 +50,12 @@ Node* SplayTree::splay(Node* x, int i) {
             }
         }
         else if (x->right->value < i) {
-            x->right->right = splay(x->right->right, i);
             x = rotateLeft(x); 
+            x->right = splay(x->right, i);
         }
         if (x->right == NULL) {
             return x; 
         }
-        // if (x->right->value == i && x->parent != NULL) {
-        //     x = rotateLeft(x); 
-        //     return rotateLeft(x->parent); 
-        // }
         return rotateLeft(x); 
     }
 }

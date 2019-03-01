@@ -6,4 +6,4 @@ prog2: SplayTree.o main.o
 	${CXX} $^ -o $@
 
 clean:
-	/bin/rm -f *.o prog1A
+	/bin/rm -f *.o prog2
